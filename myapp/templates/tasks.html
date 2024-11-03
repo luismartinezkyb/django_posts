@@ -1,3 +1,37 @@
-<h1>Tasks</h1>
+{% extends "layouts/base.html" %}
 
-<p>Nuevo lorem</p>
+
+{% block content %}
+
+
+
+<h1>Tasks list</h1>
+
+
+{% if tasks|length == 0 %}
+<h1>There's no tasks related to this projectId</h1>
+{% endif %}
+<ul >
+  {% for task in tasks %}
+  <li>
+    {{task.title}}  -
+    {% if task.done %}
+    <h4 style="color:green;">Tarea Realizada!</h4>
+    {% else %}
+    <h4 style="color:red;">Pending</h4>
+    {% endif %}
+    
+    
+    {{task.description}} -
+    {{task.project.name}}
+
+    <button>Delete</button>
+    <button>Done</button>
+    <hr>
+  </li>
+  
+  {% endfor %}
+</ul>
+
+
+{% endblock content %}

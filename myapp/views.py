@@ -24,7 +24,15 @@ def projectsHtml(request):
     'projects': projects
   })
 def tasksHtml(request):
-  return render(request, 'tasks.html')
+  tasks = Task.objects.all()
+  return render(request, 'tasks.html', {
+    'tasks': tasks
+  })
+def tasksHtmlFromProject(request, id):
+  tasks = Task.objects.filter(project_id=id)
+  return render(request, 'tasks.html', {
+    'tasks': tasks
+  })
 
 def projects(request):
   projects = list(Project.objects.values())
