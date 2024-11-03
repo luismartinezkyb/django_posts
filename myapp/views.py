@@ -64,17 +64,15 @@ def createTask(request):
   print(description)
   task = Task.objects.create(title=title, description=description, project_id=2)
   task.save()
-  return redirect('/tasks-view')
+  return redirect('list-tasks')
 
 def createProject(request):
   if(request.method == 'GET'):
     return render(request, 'projects/create-project.html', {
       'form': CreateNewProject()
     })
-  # title = request.POST['title']
-  # description = request.POST['description']
-  # print(title)
-  # print(description)
-  # task = Task.objects.create(title=title, description=description, project_id=2)
-  # task.save()
-  return redirect('/tasks-view')
+  name = request.POST['name']
+
+  project = Project.objects.create(name=name)
+  project.save()
+  return redirect('list-projects')
