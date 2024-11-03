@@ -7,11 +7,18 @@
 
 <p>list of all projects</p>
 
-<ul >
+{% comment %} <ul >
   {% for project in projects %}
-  <li>
+  <li class="card">
     {{project.name}}
   </li>
+  {% endfor %}
+</ul> {% endcomment %}
+
+  {% for project in projects %}
+  <article class="card">
+    <a href="{{project.id}}">{{project.name}}</a>
+  </article>
   {% endfor %}
 </ul>
 {% endblock content %}

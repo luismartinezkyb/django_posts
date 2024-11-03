@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static "styles/main.css" %}">
   </head>
   <body>
-    <nav>
+    <nav class="navbar container">
       <ul>
         <li>
           <a href="{% url "index" %}">Home</a>
@@ -38,8 +38,10 @@
       </ul>
     </nav>
     
-    {% block content %}
-    {% endblock content %}
+    <main class="container">
+      {% block content %}
+      {% endblock content %}
+    </main>
     <script src="" async defer></script>
   </body>
 </html>

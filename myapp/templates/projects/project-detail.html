@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<h1>Project Detail</h1>
+
+
+<h4>{{project.name}}</h4>
+<h4>{{project.id}}</h4>
+<h4>{{project.tasks}}</h4>
+
+{% if tasks %}
+    <ul>
+    {% for task in tasks %}
+        <li>{{ task.title }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tasks found for this project.</p>
+{% endif %}
+
+{% endblock content %}
