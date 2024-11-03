@@ -1,7 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from myapp.models import Project, Task
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.forms.models import model_to_dict
+from .forms import CreateNewTask, CreateNewProject
 # Create your views here.
 
 def index(request):
@@ -20,17 +21,17 @@ def about(request):
 
 def projectsHtml(request):
   projects = Project.objects.all()
-  return render(request, 'projects.html',{
+  return render(request, 'projects/projects.html',{
     'projects': projects
   })
 def tasksHtml(request):
   tasks = Task.objects.all()
-  return render(request, 'tasks.html', {
+  return render(request, 'tasks/tasks.html', {
     'tasks': tasks
   })
 def tasksHtmlFromProject(request, id):
   tasks = Task.objects.filter(project_id=id)
-  return render(request, 'tasks.html', {
+  return render(request, 'tasks/tasks.html', {
     'tasks': tasks
   })
 
@@ -52,4 +53,28 @@ def task(request, id):
   return JsonResponse(result, safe=False)
   return HttpResponse('<h1>Task: %s</h1>' %task.title)
 
-# task = serializers.serialize('json',get_object_or_404(Task, id=id))
+def createTask(request):
+  if(request.method == 'GET'):
+    return render(request, 'tasks/create-task.html', {
+      'form': CreateNewTask()
+    })
+  title = request.POST['title']
+  description = request.POST['description']
+  print(title)
+  print(description)
+  task = Task.objects.create(title=title, description=description, project_id=2)
+  task.save()
+  return redirect('/tasks-view')
+
+def createProject(request):
+  if(request.method == 'GET'):
+    return render(request, 'projects/create-project.html', {
+      'form': CreateNewProject()
+    })
+  # title = request.POST['title']
+  # description = request.POST['description']
+  # print(title)
+  # print(description)
+  # task = Task.objects.create(title=title, description=description, project_id=2)
+  # task.save()
+  return redirect('/tasks-view')

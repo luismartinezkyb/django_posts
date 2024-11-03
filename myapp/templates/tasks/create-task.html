@@ -1,0 +1,13 @@
+{% extends "layouts/tasks-layout.html" %}
+{% block taskscontent %}
+
+<h1>CreateTaskl</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button>Save</button>
+</form>
+
+
+{% endblock taskscontent %}
