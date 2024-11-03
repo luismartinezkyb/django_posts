@@ -37,3 +37,16 @@
   padding: 10px;
   
 }
+.error {
+  font: 400;
+  font-size: xx-large;
+  color: red
+}
+
+.input {
+  background: brown;
+  padding: 10px;
+  text-align: center;
+  display: block;
+  color: white;
+}
